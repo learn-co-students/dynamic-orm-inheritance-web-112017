@@ -1,14 +1,24 @@
 require 'sqlite3'
-
+require 'pry'
 require_relative "../lib/interactive_record.rb"
 require_relative "../lib/song.rb"
 require_relative "../config/environment.rb"
 
 song = Song.new(name: "Hello", album: "25")
+two = Song.new(name: "Wish You Were Here", album: "Wish You Were Here")
+three = Song.new(name: "Have a Cigar", album: "Wish You Were Here")
 puts "song name: " + song.name
 puts "song album: " + song.album
 song.save
+two.save
+three.save
 
 puts Song.find_by_name("Hello")
 
-# DB[:conn].execute("SELECT * FROM songs")
+blank = Song.new()
+blank.name = "Shine On You Crazy Diamond"
+
+testing =  DB[:conn].execute("SELECT * FROM songs")
+puts testing
+
+binding.pry
